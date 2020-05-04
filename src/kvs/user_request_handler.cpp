@@ -89,10 +89,19 @@ void user_request_handler(
             } else {
               tp->set_payload(res.first);
               if (type != TOPK_PRIORITY) {
-                log->info("type = ", type, " not TopK");
-                log->info("key-> ", key, " <-key");
+                log->info("type = ");
+                log->info(type);
+                log->info(" not TopK");
+                log->info("key-> ");
+                log->info(key);
+                log->info(" <-key");
               } else {
-                log->info("length = ",  deserialize_top_k_priority(res.first).reveal().size());
+                log->info("key->> ");
+                log->info(key);
+                log->info(" <<-key");
+                log->info("length = ");
+                log->info(deserialize_top_k_priority(res.first).reveal().size());
+                log->info("<< length");
 
               }
               
