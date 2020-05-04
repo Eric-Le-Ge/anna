@@ -142,6 +142,23 @@ void replication_response_handler(
                   process_get(key, serializers[stored_key_map[key].type_]);
               tp->set_lattice_type(stored_key_map[key].type_);
               tp->set_payload(res.first);
+              auto type = stored_key_map[key].type_;
+              if (type != TOPK_PRIORITY) {
+                log->info("type = ");
+                log->info(type);
+                log->info(" not TopK");
+                log->info("key -> ");
+                log->info(key);
+                log->info(" <- key");
+              } else {
+                log->info("key ->> ");
+                log->info(key);
+                log->info(" <<- key");
+                log->info("length = ");
+                log->info(deserialize_top_k_priority(res.first).reveal().size());
+                log->info("<< length");
+
+              }
               tp->set_error(res.second);
             }
           } else {
