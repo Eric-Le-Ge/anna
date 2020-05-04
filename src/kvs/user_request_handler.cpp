@@ -1,3 +1,4 @@
+
 //  Copyright 2019 U.C. Berkeley RISE Lab
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -88,20 +89,21 @@ void user_request_handler(
  
             } else {
               tp->set_payload(res.first);
-              if (type != TOPK_PRIORITY) {
-                log->info("type = ");
-                log->info(type);
-                log->info(" not TopK");
-                log->info("key-> ");
-                log->info(key);
-                log->info(" <-key");
+              if (type == LatticeType::TOPK_PRIORITY) {
+                log->info("key = {}",  key);
+                log->info("length = {}",  deserialize_top_k_priority(res.first).reveal().size());
+                // log->info(type);
+                // log->info(" not TopK");
+                // log->info("key-> ");
+                // log->info(key);
+                // log->info(" <-key");
               } else {
                 log->info("key->> ");
                 log->info(key);
                 log->info(" <<-key");
-                log->info("length = ");
-                log->info(deserialize_top_k_priority(res.first).reveal().size());
-                log->info("<< length");
+                // log->info("length = ");
+                // log->info(deserialize_top_k_priority(res.first).reveal().size());
+                // log->info("<< length");
 
               }
               
